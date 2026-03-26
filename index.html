@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Калькулятор блюд</title>
+
+<style>
+body {
+  font-family: Arial;
+}
+
+.block {
+  display: inline-block;
+  margin: 20px;
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.input {
+  background-color: #9fb6cc;
+}
+
+.result {
+  background-color: #c6e0b4;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Калькулятор продуктов</h2>
+
+<div id="container"></div>
+
+<script>
+const data = [
+  {
+    name: "Свекольный со шпинатом",
+    products: [
+      ["брокколи", 0.05],
+      ["окорочка", 0.08],
+      ["цветная капуста", 0.05],
+      ["болгарский перец", 0.05],
+      ["помидоры", 0.045],
+      ["красный лук", 0.03],
+      ["чеснок", 0.01],
+      ["лапниза", 0.02]
+    ]
+  },
+  {
+    name: "Азиатский",
+    products: [
+      ["вырезка", 0.05],
+      ["огурцы", 0.1],
+      ["помидоры", 0.07],
+      ["болг. перец", 0.05],
+      ["чеснок", 0.005],
+      ["красный лук", 0.035]
+    ]
+  },
+  {
+    name: "Баклажан чили",
+    products: [
+      ["баклажан", 0.2],
+      ["черри", 0.05],
+      ["кинза", 0.003],
+      ["соус Aroy", 0.08],
+      ["крахмал", 0.04]
+    ]
+  },
+  {
+    name: "Майо",
+    products: [
+      ["куриная грудка", 0.07],
+      ["ананас", 0.1],
+      ["кукуруза", 0.06],
+      ["майонез", 0.006],
+      ["голландский сыр", 0.05]
+    ]
+  }
+];
+
+function render() {
+  let html = "";
+
+  data.forEach((dish, i) => {
+    html += `
+    <div class="block">
+      <table>
+        <tr>
+          <th colspan="3">${dish.name}</th>
+        </tr>
+        <tr>
+          <td colspan="2">Порции</td>
+          <td><input class="input" type="number" id="p${i}" value="0" oninput="calculate(${i})"></td>
+        </tr>
+    `;
+
+    dish.products.forEach((p, j) => {
+      html += `
+        <tr>
+          <td>${p[0]}</td>
+          <td>${p[1]}</td>
+          <td class="result" id="r${i}_${j}">0</td>
+        </tr>
+      `;
+    });
+
+    html += "</table></div>";
+  });
+
+  document.getElementById("container").innerHTML = html;
+}
+
+function calculate(i) {
+  let portions = document.getElementById("p" + i).value;
+
+  data[i].products.forEach((p, j) => {
+    let result = (p[1] * portions).toFixed(3);
+    document.getElementById(`r${i}_${j}`).innerText = result;
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
