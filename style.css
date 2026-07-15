@@ -1,0 +1,7 @@
+body{font-family:Arial;background:#f4f6f9;padding:20px}
+h1{text-align:center}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:15px;margin:15px;display:inline-block;vertical-align:top}
+table{border-collapse:collapse;width:100%;background:#fff}
+td,th{border:1px solid #ddd;padding:8px;font-size:18px}
+input{font-size:22px;padding:6px;width:90px;text-align:center}
+.result{background:#dff5dc}
